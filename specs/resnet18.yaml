@@ -1,0 +1,359 @@
+# Network details
+name: resnet18
+type: 18
+
+# Meta information
+
+# Architecture definition
+
+layers:
+  # Stem layer
+  layer0:
+    block0:
+      - type: Conv2d
+        in_channels: 3 # 1 for monochrome datasets, 3 for RGB datasets
+        out_channels: 64
+        kernel_size: 7
+        stride: 2
+        padding: 3
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: MaxPool2d
+        kernel_size: 3
+        stride: 2
+        padding: 1
+
+      - type: Fork
+
+  # Resnet layer 1
+  layer1:
+    block0:
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Resnet layer 2
+  layer2:
+    block0:
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 128
+        kernel_size: 3
+        stride: 2
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 2
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Resnet layer 3
+  layer3:
+    block0:
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 256
+        kernel_size: 3
+        stride: 2
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 2
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Resnet layer 4
+  layer4:
+    block0:
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 512
+        kernel_size: 3
+        stride: 2
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 512
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 2
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 512
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 512
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: Add
+
+      - type: Fork
+
+  # Global average pooling
+  layer5:
+    block0:
+      - type: AdaptiveAvgPool2d
+        output_size: 1
+
+  # Fully connected layer
+  layer6:
+    block0:
+      - type: Linear
+        in_features: 512
+        out_features: 1000
+
+kernel_weights:
+  - [64, 3, 7, 7] # 1 for monochrome datasets, 3 for RGB datasets
+  - [64, 64, 3, 3]
+  - [64, 64, 3, 3]
+  - [64, 64, 3, 3]
+  - [64, 64, 3, 3]
+  - [128, 64, 3, 3]
+  - [128, 128, 3, 3]
+  - [128, 128, 3, 3]
+  - [128, 128, 3, 3]
+  - [256, 128, 3, 3]
+  - [256, 256, 3, 3]
+  - [256, 256, 3, 3]
+  - [256, 256, 3, 3]
+  - [512, 256, 3, 3]
+  - [512, 512, 3, 3]
+  - [512, 512, 3, 3]
+  - [512, 512, 3, 3]
+
+downsample_weights:
+  - [128, 64, 1, 1]
+  - [256, 128, 1, 1]
+  - [512, 256, 1, 1]
+
+downsample_biases:
+  - 128
+  - 256
+  - 512
+
+kernel_biases:
+  - 64
+  - 64
+  - 64
+  - 64
+  - 64
+  - 128
+  - 128
+  - 128
+  - 128
+  - 256
+  - 256
+  - 256
+  - 256
+  - 512
+  - 512
+  - 512
+  - 512
+
+linear_weights:
+  - [10, 512]
+
+linear_biases:
+  - 10
+
+n_layers: 18
+
+n_downsamples: 3

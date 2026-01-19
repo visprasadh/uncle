@@ -1,0 +1,886 @@
+name: resnet50
+type: 50
+
+# Meta information
+
+# Architecture definition
+
+layers:
+  # Stem layer
+  layer0:
+    block0:
+      - type: Conv2d
+        in_channels: 3 # 1 for monochrome datasets, 3 for RGB datasets
+        out_channels: 64
+        kernel_size: 7
+        stride: 2
+        padding: 3
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: MaxPool2d
+        kernel_size: 3
+        stride: 2
+        padding: 1
+
+      - type: Fork
+
+  # Resnet layer 1
+  layer1:
+    block0:
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      # - type: Dropout2d
+      #   p: 0.5
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 1
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 64
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block2:
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 64
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 64
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 64
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 64
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Resnet layer 2
+  layer2:
+    block0:
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 128
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 2
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 2
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 128
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+    block2:
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 128
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block3:
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 128
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 128
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 128
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 128
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Resnet layer 3
+  layer3:
+    block0:
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 2
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 1024
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 1024
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 2
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 1024
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 1024
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 1024
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block2:
+      - type: Conv2d
+        in_channels: 1024
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 1024
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 1024
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block3:
+      - type: Conv2d
+        in_channels: 1024
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 1024
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 1024
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block4:
+      - type: Conv2d
+        in_channels: 1024
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 1024
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 1024
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block5:
+      - type: Conv2d
+        in_channels: 1024
+        out_channels: 256
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 256
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 256
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 256
+        out_channels: 1024
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 1024
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Resnet layer 4
+  layer4:
+    block0:
+      - type: Conv2d
+        in_channels: 1024
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 512
+        kernel_size: 3
+        stride: 2
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 2048
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 2048
+
+      - type: ReLU
+
+      - type: DownsampleAdd
+        stride: 2
+
+      - type: Fork
+
+    block1:
+      - type: Conv2d
+        in_channels: 2048
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 512
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 2048
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 2048
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+    block2:
+      - type: Conv2d
+        in_channels: 2048
+        out_channels: 512
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 512
+        kernel_size: 3
+        stride: 1
+        padding: 1
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 512
+
+      - type: ReLU
+
+      - type: Conv2d
+        in_channels: 512
+        out_channels: 2048
+        kernel_size: 1 
+        stride: 1
+        padding: 0
+        bias: False
+
+      - type: BatchNorm2d
+        num_features: 2048
+
+      - type: ReLU
+
+      - type: Add
+
+      - type: Fork
+
+  # Output layer
+  layer5:
+    block0:
+      - type: AdaptiveAvgPool2d
+        output_size: 1
+
+  layer6:
+    block0:
+      - type: Linear
+        in_features: 2048
+        out_features: 1000
+
+kernel_weights:
+  - [64, 3, 7, 7]
+  - [64, 64, 1, 1]
+  - [64, 64, 3, 3]
+  - [256, 64, 1, 1]
+  - [64, 256, 1, 1]
+  - [64, 64, 3, 3]
+  - [256, 64, 1, 1]
+  - [64, 256, 1, 1]
+  - [64, 64, 3, 3]
+  - [256, 64, 1, 1]
+  - [128, 256, 1, 1]
+  - [128, 128, 3, 3]
+  - [512, 128, 1, 1]
+  - [128, 512, 1, 1]
+  - [128, 128, 3, 3]
+  - [512, 128, 1, 1]
+  - [128, 512, 1, 1]
+  - [128, 128, 3, 3]
+  - [512, 128, 1, 1]
+  - [128, 512, 1, 1]
+  - [128, 128, 3, 3]
+  - [512, 128, 1, 1]
+  - [256, 512, 1, 1]
+  - [256, 256, 3, 3]
+  - [1024, 256, 1, 1]
+  - [256, 1024, 1, 1]
+  - [256, 256, 3, 3]
+  - [1024, 256, 1, 1]
+  - [256, 1024, 1, 1]
+  - [256, 256, 3, 3]
+  - [1024, 256, 1, 1]
+  - [256, 1024, 1, 1]
+  - [256, 256, 3, 3]
+  - [1024, 256, 1, 1]
+  - [256, 1024, 1, 1]
+  - [256, 256, 3, 3]
+  - [1024, 256, 1, 1]
+  - [256, 1024, 1, 1]
+  - [256, 256, 3, 3]
+  - [1024, 256, 1, 1]
+  - [512, 1024, 1, 1]
+  - [512, 512, 3, 3]
+  - [2048, 512, 1, 1]
+  - [512, 2048, 1, 1]
+  - [512, 512, 3, 3]
+  - [2048, 512, 1, 1]
+  - [512, 2048, 1, 1]
+  - [512, 512, 3, 3]
+  - [2048, 512, 1, 1]
+
+kernel_biases:
+  - 64
+  - 64
+  - 64
+  - 256
+  - 64
+  - 64
+  - 256
+  - 64
+  - 64
+  - 256
+  - 128
+  - 128
+  - 512
+  - 128
+  - 128
+  - 512
+  - 128
+  - 128
+  - 512
+  - 128
+  - 128
+  - 512
+  - 256
+  - 256
+  - 1024
+  - 256
+  - 256
+  - 1024
+  - 256
+  - 256
+  - 1024
+  - 256
+  - 256
+  - 1024
+  - 256
+  - 256
+  - 1024
+  - 256
+  - 256
+  - 1024
+  - 512
+  - 512
+  - 2048
+  - 512
+  - 512
+  - 2048
+  - 512
+  - 512
+  - 2048
+
+linear_weights:
+  - [10, 2048]
+
+linear_biases:
+  - 10
+
+downsample_weights:
+  - [256, 64, 1, 1]
+  - [512, 256, 1, 1]
+  - [1024, 512, 1, 1]
+  - [2048, 1024, 1, 1]
+
+downsample_biases:
+  - 256
+  - 512
+  - 1024
+  - 2048
+
+n_layers: 50
+
+n_downsamples: 4
+
+

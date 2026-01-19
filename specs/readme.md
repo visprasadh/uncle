@@ -1,0 +1,1 @@
+Contains specifications for the resnet architectures used in the experiments

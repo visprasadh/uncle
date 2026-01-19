@@ -1,0 +1,33 @@
+batch_size: 512
+beta: 0.001
+chunk: true
+chunk_embedding_dim: 32
+data_path: ./data
+dataset: five_datasets
+gamma: 0.1
+gold_model_path: ./weights/hnet/
+gpu: 3
+hnet_arch: layer_chunked_yaml
+hnet_layers:
+- 128
+- 256
+- 512
+instruction_str: L0,L1,U0,L2,L3,L4,U1
+lr: 0.001
+mnet_arch: resnet
+mnet_in_dim:
+- 3
+- 32
+- 32
+mnet_spec_path: specs
+n_chunks: 200
+n_epochs: 30
+n_forget_epochs: 100
+n_sampling: 10
+n_tasks: 5
+partial: false
+resnet_type: 50
+seed: 5
+seq_name: 5a
+task_embedding_dim: 32
+ulr: 0.001
