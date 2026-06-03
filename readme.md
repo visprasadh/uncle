@@ -1,12 +1,12 @@
-# UnCLe: An Unlearning framework for Continual Learning
+# UnCLe: A Hypernetwork Framework for Data-Free Unlearning and Continual Learning
 
-## Project Description
+## Project Abstract
 
-Code repostory for the ICLR submisssion UnCLe
+Growing concerns surrounding AI safety and data privacy have driven the development of Machine Unlearning. However, current unlearning algorithms predominantly assume an offline training paradigm with access to the original training data. This assumption fails in Continual Learning (CL), where data is transient and models update incrementally with each arriving task. We find that applying conventional unlearning to CL environments creates two critical failures, namely catastrophic forgetting of retained tasks and catastrophic remembering of previously unlearned tasks. Moreover, the strict memory constraints of CL restrict the use of conventional unlearning methods that are predominantly data-dependent. To bridge this gap, we propose UnCLe, a Hypernetwork Framework for Data-Free Unlearning and Continual Learning. UnCLe is a task-incremental/decremental framework that employs a hypernetwork to generate task-specific parameters from task embeddings. Unlearning is achieved by optimizing the hypernetwork to generate noise for specific task embeddings, effectively neutralizing the knowledge without strictly requiring the original data. Empirical evaluations on sequential vision benchmarks demonstrate UnCLe’s ability to perform multiple learning and unlearning operations with minimal disruption to previously acquired knowledge. 
 
 ## How to Run the Project
 
-1. Install dependencies (refer to the requirements.txt file)
+1. Install dependencies 
 2. Prepare your dataset(s) in the `./data` directory
 3. Configure your experiment using a YAML file (see Configuration section)
 4. Run the run.sh script
