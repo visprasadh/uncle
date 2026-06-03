@@ -67,3 +67,22 @@ Each configuration file includes the following important parameters:
 To use a specific configuration file, pass its name (without the .yaml extension) as an argument when running the main script. For example:
 
 This will load the configuration from `config/main/c100_10b_s5.yaml` and run the experiment with those settings.
+
+## Citation
+
+If you use this project, please consider citing our preprint:
+
+**An Unlearning Framework for Continual Learning**  
+Sayanta Adhikari, Vishnuprasadh Kumaravelu, and P. K. Srijith  
+arXiv: [2509.17530](https://arxiv.org/abs/2509.17530)
+
+```bibtex
+@misc{adhikari2025unlearningframeworkcontinuallearning,
+  title={An Unlearning Framework for Continual Learning},
+  author={Sayanta Adhikari and Vishnuprasadh Kumaravelu and P. K. Srijith},
+  year={2025},
+  eprint={2509.17530},
+  archivePrefix={arXiv},
+  primaryClass={cs.LG},
+  url={https://arxiv.org/abs/2509.17530}
+}
